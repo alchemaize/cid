@@ -2,18 +2,18 @@
 
 **The development methodology for the AI-native era.**
 
-CID is the first software development framework designed from a blank sheet for the assumption that AI does the implementation, humans do the intent and the verification, and the team's job is to scale that loop without breaking it.
+CID is the first software development framework designed from a blank sheet for the assumption that AI does the implementation, humans do the intent and the verification, and the team's job is to scale that pipeline without breaking it.
 
 ## The Problem
 
 Every framework your team uses — Scrum, SAFe, Kanban — was designed to coordinate human coding throughput. AI removed that bottleneck. The new bottleneck is **intent clarity** and **verification rigor**. CID optimizes for the new bottleneck.
 
-## The CID Loop
+## The CID Pipeline
 
 ```
 INTENT → CONTEXT → GENERATION → VERIFICATION → OBSERVATION
   ▲                                                    │
-  └──────────────── feedback loop ─────────────────────┘
+  └────────────── feedback edges ──────────────────────┘
 ```
 
 - **Intent** — Write a Verifiable Outcome Slice (VOS): WHY, WHAT (Gherkin), CONTEXT, OUTCOME
@@ -21,6 +21,8 @@ INTENT → CONTEXT → GENERATION → VERIFICATION → OBSERVATION
 - **Generation** — AI executes the task plan with TDD (test first, then code)
 - **Verification** — Acceptance contract runs. All scenarios pass or it doesn't ship.
 - **Observation** — Measure the outcome hypothesis in production
+
+The pipeline runs forward. The feedback edges run backward: a verification failure can refine the context, an observation can author a new intent, a generation result can prompt a revision to the intent itself. The forward path is the pipeline; the reverse edges are what keep it learning.
 
 ## Three Roles
 
@@ -72,19 +74,26 @@ Tell your AI agent: *"Using CID, build VOS #1 from .vos/todo/"*
 ## Repository Structure
 
 ```
-├── ELCID_Framework.md              # Enterprise governance framework
-├── CID_ELCID_Complete_Methodology.md  # Full methodology reference
+├── ELCID_Framework.md                  # Enterprise governance framework
+├── CID_ELCID_Complete_Methodology.md   # Full methodology reference
 ├── cid/
-│   ├── README.md                   # CID quick start
-│   ├── vos-specification.md        # VOS document format
-│   ├── vos-example.md              # Complete example VOS
-│   ├── development-workflow.md     # TDD protocols
+│   ├── README.md                       # CID quick start
+│   ├── vos-specification.md            # VOS document format
+│   ├── vos-example.md                  # Complete example VOS
+│   ├── development-workflow.md         # TDD protocols
 │   ├── cid-rules/
-│   │   └── core-workflow.md        # Agent-consumable rules (install this)
-│   └── cid-rule-details/           # Detailed phase rules
-│       ├── common/                 # Process overview, session continuity
-│       ├── inception/              # Workspace detection, requirements
-│       └── construction/           # Code generation protocols
+│   │   └── core-workflow.md            # Agent-consumable rules (install this)
+│   └── cid-rule-details/               # Detailed phase rules
+│       ├── common/                     # Process overview, session continuity
+│       ├── inception/                  # Workspace detection, requirements
+│       └── construction/               # Code generation protocols
+├── extensions/
+│   └── compliance/                     # Regulatory rule packs (Ch 11)
+│       ├── README.md                   # Extension format and usage
+│       ├── hipaa/                      # 7 rules, 45 CFR Part 164
+│       ├── fedramp/                    # 8 rules, NIST 800-53 baseline
+│       └── financial-services/         # 7 rules, SOX/PCI/segregation
+├── ERRATA.md                           # Book corrections and revisions
 └── LICENSE
 ```
 
@@ -107,9 +116,17 @@ ELCID scales CID across multiple teams with:
 
 See `ELCID_Framework.md` for the full enterprise framework.
 
+## Compliance Extensions
+
+The HIPAA, FedRAMP, and Financial Services rule documents are now in `extensions/compliance/`. They are open under MIT, like the rest of the repo. The rule documents are the substance of Chapter 11's argument: numbered rules, mapped to specific regulatory citations, with verification criteria written precisely enough for an automated checker to enforce.
+
+The runner that loads these rules into a live stream and enforces them at generation time ships with [Catalyst](https://alchemaize.ai/catalyst) (commercial). The rule documents are designed so a team can roll its own runner from them; the format is plain Markdown with a stable structure.
+
+A fourth extension (banking — GLBA, NYDFS, FFIEC, BSA/AML) ships only with Catalyst at this time.
+
 ## Catalyst
 
-[Catalyst](https://alchemaize.ai/catalyst) is Alchemaize's commercial offering for CID/ELCID adoption — workshops, compliance extensions (HIPAA, FedRAMP, PCI-DSS), quality evaluator, and expert coaching. CID is open. Catalyst makes adoption faster.
+[Catalyst](https://alchemaize.ai/catalyst) is Alchemaize's commercial offering for CID/ELCID adoption — workshops, the rule runner, the quality evaluator, the banking extension, and expert coaching. CID is open. Catalyst makes adoption faster.
 
 ## License
 

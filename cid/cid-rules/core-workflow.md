@@ -147,7 +147,7 @@ All code generation follows the protocols in `development-workflow.md`:
 **Purpose**: Detailed design, implementation, and verification.
 **Focus**: Determine HOW to build it, then build it.
 
-### Per-Unit Loop
+### Per-Unit Pipeline
 
 For each unit of work, execute the following in sequence:
 

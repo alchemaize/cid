@@ -2,9 +2,9 @@
 
 Technical reference for AI agents and developers.
 
-## The CID Loop
+## The CID Pipeline
 
-CID operates as a continuous loop, not a linear pipeline:
+CID operates as a pipeline with feedback edges:
 
 ```
 INTENT → CONTEXT → GENERATION → VERIFICATION → OBSERVATION → (back to INTENT)
@@ -16,7 +16,7 @@ INTENT → CONTEXT → GENERATION → VERIFICATION → OBSERVATION → (back to 
 - **Verification** — Acceptance contracts run, TDD cycles, compliance checks
 - **Observation** — Shipped VOS instrumented in production, outcome hypothesis measured
 
-Observations feed back into new intents. The loop is the unit of work.
+Observations feed back into new intents. The pipeline is the unit of work.
 
 ## The Adaptive Workflow Inside Generation
 

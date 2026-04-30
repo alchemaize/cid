@@ -21,7 +21,7 @@ With Kiro, Claude Code, Cursor, Copilot, and the next wave of agentic developmen
 
 The middle — the actual writing of code — is now a near-zero-cost operation. Frameworks that continue to optimize for the old middle are not just inefficient; they are actively harmful, because they impose human-paced coordination overhead on a system that no longer has a human-paced bottleneck.
 
-ELCID is built for the new constraint. It is the first development framework designed from a blank sheet for the assumption that AI does the implementation, humans do the intent and the verification, and the organization's job is to scale that loop without breaking it.
+ELCID is built for the new constraint. It is the first development framework designed from a blank sheet for the assumption that AI does the implementation, humans do the intent and the verification, and the organization's job is to scale that pipeline without breaking it.
 
 ---
 
@@ -93,9 +93,9 @@ A VOS is the smallest piece of user-observable value that can be independently s
 
 If any of the five is missing, the VOS is not ready for the queue. This is the only gate.
 
-### The CID Loop
+### The CID Pipeline
 
-CID operates as a continuous loop, not a linear pipeline. Every VOS cycles through five stages that feed back into each other:
+CID operates as a pipeline with feedback edges. Every VOS cycles through five stages that feed back into each other:
 
 ```
     ┌──────────┐    ┌──────────┐    ┌────────────┐    ┌──────────────┐    ┌─────────────┐
@@ -103,20 +103,20 @@ CID operates as a continuous loop, not a linear pipeline. Every VOS cycles throu
     └──────────┘    └──────────┘    └────────────┘    └──────────────┘    └─────────────┘
          ▲                                                                       │
          │                                                                       │
-         └───────────────────────── feedback loop ──────────────────────────────┘
+         └─────────────────────── feedback edges ────────────────────────────┘
 ```
 
 - **Intent** — A human authors the VOS: the WHY, the WHAT (Gherkin acceptance contract), and the outcome hypothesis.
 - **Context** — The intent engineer curates the context bundle: code, schemas, prior VOSs, architectural decisions. Context quality is the single largest determinant of generation quality.
 - **Generation** — AI agents execute the task plan against the acceptance contract. The adaptive workflow (inception, construction, operations) runs inside this stage, scaling depth to complexity.
 - **Verification** — The acceptance contract runs. TDD cycles, static analysis, security scans, compliance checks. Nothing advances without passing.
-- **Observation** — The shipped VOS is instrumented in production against its outcome hypothesis. Real data closes the loop — confirming the hypothesis or seeding the next intent.
+- **Observation** — The shipped VOS is instrumented in production against its outcome hypothesis. Real data closes the pipeline — confirming the hypothesis or seeding the next intent.
 
-The loop is the unit of work. An observation can author a new intent. A verification failure can refine the context. A generation result can prompt a revision to the intent itself. This is not waterfall with AI in the middle — it is a learning system that gets better with every cycle.
+The pipeline is the unit of work. An observation can author a new intent. A verification failure can refine the context. A generation result can prompt a revision to the intent itself. This is not waterfall with AI in the middle — it is a learning system that gets better with every cycle.
 
 ### The VOS Lifecycle States
 
-Every VOS passes through six states within the loop. There are no others.
+Every VOS passes through six states within the pipeline. There are no others.
 
 ```
 DRAFTED → CONTRACTED → QUEUED → GENERATING → VERIFYING → SHIPPED
@@ -195,11 +195,11 @@ Designs and maintains the acceptance contracts, the verification harness, the co
 
 One recurring meeting. Thirty minutes. Weekly.
 
-**The Loop Review.** The pod looks at four numbers from the past seven days: intent cycle time, first-pass verification rate, in-production incident rate, and outcome hypothesis accuracy. If any of the four is trending wrong, the pod identifies the cause and adjusts. That is the entire ceremony footprint.
+**The Pipeline Review.** The pod looks at four numbers from the past seven days: intent cycle time, first-pass verification rate, in-production incident rate, and outcome hypothesis accuracy. If any of the four is trending wrong, the pod identifies the cause and adjusts. That is the entire ceremony footprint.
 
 No standups. CID pods coordinate through the intent queue and the verification dashboard, both of which are continuously visible. If a pod finds itself wanting a standup, it is a signal that the queue or the dashboard is broken.
 
-No retrospectives separate from the Loop Review. The metrics surface problems in real time.
+No retrospectives separate from the Pipeline Review. The metrics surface problems in real time.
 
 No sprint planning. The queue is always open. VOSs enter when contracted; agents pick them up when capacity exists.
 
@@ -211,7 +211,7 @@ Three persistent artifacts. Total.
 
 2. **The Verification Harness** — The executable system that runs every acceptance contract. Includes the TDD framework, static analysis, security scanning, compliance extension checks, and observability instrumentation. Owned by the Verification Owner, treated as production infrastructure.
 
-3. **The Loop Dashboard** — Real-time view of the four team metrics, plus the state of every VOS in flight. Visible to the pod, the stream, and the enterprise layer.
+3. **The Pipeline Dashboard** — Real-time view of the four team metrics, plus the state of every VOS in flight. Visible to the pod, the stream, and the enterprise layer.
 
 No Jira. No Confluence pages. No sprint boards. No burndown charts. No story point spreadsheets. If a team finds itself reaching for any of those, CID has not been adopted; it has been costumed.
 
@@ -363,7 +363,7 @@ Other tools work with the same rules in their native format. The methodology is 
 | **Atomic unit** | Story (estimated in points, scoped to a sprint) | Verifiable Outcome Slice (defined by an executable acceptance contract) |
 | **Cadence** | 2-week sprints inside 10-week Program Increments | Continuous flow; no sprints, no PIs |
 | **Planning ceremony** | PI Planning — 2 days, every 10 weeks, all hands | Monthly Intent Review — 90 minutes |
-| **Team ceremonies** | Standup, Backlog Refinement, Sprint Planning, Sprint Review, Retrospective, System Demo, Scrum of Scrums | Loop Review — 30 minutes, weekly |
+| **Team ceremonies** | Standup, Backlog Refinement, Sprint Planning, Sprint Review, Retrospective, System Demo, Scrum of Scrums | Pipeline Review — 30 minutes, weekly |
 | **Number of defined roles** | ~14 | 6 total (3 team, 3 enterprise) |
 | **Funding model** | Project or value stream, gated by PI cycles | Intent stream with continuous outcome-based reallocation |
 | **Primary metrics** | Velocity, predictability, program predictability measure, feature completion | Cycle time, first-pass verification rate, outcome KPI delta, cost per shipped intent |
@@ -383,7 +383,7 @@ ELCID is not a transformation program. It is designed to be adopted one stream a
 Pick one strategic intent. Stand up one CID pod with the three roles filled. Install the CID workflow rules into the team's AI coding tool. Create the VOS repository. Begin drafting and contracting VOSs. Ship the first VOS by end of week 2. Measure the four team metrics from day one.
 
 ### Phase 2: Stream Maturation (Weeks 5–12)
-Tune the acceptance contract patterns. Establish the cycle time and first-pass verification baselines. Run the first three Loop Reviews. Begin instrumenting outcome hypotheses against real production data. Deploy the evaluator to measure output quality objectively. Enable compliance extensions if applicable. By the end of Phase 2, the stream should be shipping VOSs at 5–10x the pre-CID rate with equivalent or lower defect rates.
+Tune the acceptance contract patterns. Establish the cycle time and first-pass verification baselines. Run the first three Pipeline Reviews. Begin instrumenting outcome hypotheses against real production data. Deploy the evaluator to measure output quality objectively. Enable compliance extensions if applicable. By the end of Phase 2, the stream should be shipping VOSs at 5–10x the pre-CID rate with equivalent or lower defect rates.
 
 ### Phase 3: Enterprise Layer (Weeks 13–24)
 Stand up the Portfolio of Intents. Appoint the Intent Portfolio Lead and the Verification Officer. Run the first Monthly Intent Review with the original stream as the only participant. Onboard the second and third streams. Begin reallocating funding based on outcome metrics rather than project plans.
@@ -409,7 +409,7 @@ Every framework attracts costuming — the practice of adopting the vocabulary w
 
 **Project-funding zombies.** The organization adopts the language of intent streams but continues to allocate budget on annual project cycles. Streams cannot reallocate, cannot scale up or down based on outcome, and revert to project behavior. Diagnostic: Lean Intent Funding exists on a slide but not in the general ledger.
 
-**Ceremony creep.** A well-meaning manager reintroduces a weekly status meeting "just to stay aligned." Then a planning meeting. Then a retrospective. Within a quarter, ELCID has been quietly replaced with Scrum. Diagnostic: any recurring meeting that is not the Loop Review or the Monthly Intent Review.
+**Ceremony creep.** A well-meaning manager reintroduces a weekly status meeting "just to stay aligned." Then a planning meeting. Then a retrospective. Within a quarter, ELCID has been quietly replaced with Scrum. Diagnostic: any recurring meeting that is not the Pipeline Review or the Monthly Intent Review.
 
 **Context neglect.** The context bundle is treated as optional. Agents scrape whatever they find. Output quality is inconsistent. The intent engineer blames the model instead of the context. Diagnostic: high variance in first-pass verification rate across similar VOSs.
 
@@ -441,9 +441,9 @@ Every framework attracts costuming — the practice of adopting the vocabulary w
 
 **Intent Stream** — A persistent, funded flow of VOSs pointed at a single strategic intent. The unit of organization at the enterprise layer.
 
-**Loop Dashboard** — Real-time view of the four team metrics and the state of every VOS in flight.
+**Pipeline Dashboard** — Real-time view of the four team metrics and the state of every VOS in flight.
 
-**Loop Review** — The single weekly team ceremony in CID. Thirty minutes.
+**Pipeline Review** — The single weekly team ceremony in CID. Thirty minutes.
 
 **Monthly Intent Review** — The single monthly enterprise ceremony in ELCID. Ninety minutes.
 
