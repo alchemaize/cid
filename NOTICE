@@ -1,0 +1,10 @@
+CID — Continuous Intent Delivery
+Copyright 2026 Alchemaize, Inc.
+
+This methodology and its accompanying templates, examples, and rule
+documents were developed at Alchemaize, Inc. (https://alchemaize.ai).
+
+The runner that loads CID rules into a live stream and enforces them at
+generation time, the quality evaluator, and the banking compliance
+extension are commercial offerings under Catalyst
+(https://alchemaize.ai/catalyst) and are not covered by this license.

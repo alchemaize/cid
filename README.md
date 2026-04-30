@@ -118,7 +118,7 @@ See `ELCID_Framework.md` for the full enterprise framework.
 
 ## Compliance Extensions
 
-The HIPAA, FedRAMP, and Financial Services rule documents are now in `extensions/compliance/`. They are open under MIT, like the rest of the repo. The rule documents are the substance of Chapter 11's argument: numbered rules, mapped to specific regulatory citations, with verification criteria written precisely enough for an automated checker to enforce.
+The HIPAA, FedRAMP, and Financial Services rule documents are now in `extensions/compliance/`. They are open under Apache 2.0, like the rest of the repo. The rule documents are the substance of Chapter 11's argument: numbered rules, mapped to specific regulatory citations, with verification criteria written precisely enough for an automated checker to enforce.
 
 The runner that loads these rules into a live stream and enforces them at generation time ships with [Catalyst](https://alchemaize.ai/catalyst) (commercial). The rule documents are designed so a team can roll its own runner from them; the format is plain Markdown with a stable structure.
 
@@ -130,7 +130,7 @@ A fourth extension (banking — GLBA, NYDFS, FFIEC, BSA/AML) ships only with Cat
 
 ## License
 
-MIT — see LICENSE file.
+Apache License 2.0. See `LICENSE` for the full text and `NOTICE` for attribution requirements. The methodology, templates, examples, and rule documents in this repo are open. The runner, quality evaluator, and banking extension ship with [Catalyst](https://alchemaize.ai/catalyst) and are not covered by this license.
 
 ---
 
